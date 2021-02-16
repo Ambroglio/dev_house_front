@@ -35,26 +35,26 @@ Javascript module system is weak so there is often many folder and files.
 
 We will use thoose main modules:
 - src/
-    - index.js
+    - App.js
     - server.js
     - client.js
     - app/ : _Application logic here_
         - App.css : _App CSS_
         - App.test.js : _App Tests_
-        - index.js : _App component (main component of the application)_
+        - App.js : _App component (main component of the application)_
         - action.js : _Redux Actions_
         - reducer.js : _Redux Reducer function and initial state_
         - store.js : _Redux Store_
     - pages/ : _Page components here_
         - Home/ : _sample, each page should follow this template_
-            - index.js : _Home component ... should be replaced by login page_
+            - App.js : _Home component ... should be replaced by login page_
             - Home.css : _Home CSS_
         - myPage/ : _sample, each page should follow this template_
-            - index.js : _MyPage component_
+            - App.js : _MyPage component_
             - MyPage.css : _MyPage CSS_
     - components/ : _Reusable components here_
         - simpleComponent/ : _sample, each reusable component should follow this template_
-            - index.js : _SimpleComponent component_
+            - App.js : _SimpleComponent component_
             - SimpleComponent.test.js : _SimpleComponent test_
             - SimpleComponent.css : _SimpleComponent CSS_
 

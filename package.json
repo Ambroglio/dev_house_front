@@ -9,7 +9,10 @@
     "start": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "express": "4.17.1",
+    "fontsource-roboto": "^4.0.0",
     "razzle": "3.3.13",
     "react": "16.14.0",
     "react-dom": "16.14.0",

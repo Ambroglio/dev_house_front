@@ -32,14 +32,14 @@ While usual reducer function just return the state, [redux-loop](https://redux-l
 
 To dispact an action inside a component, use the  function [dispatch](https://redux.js.org/api/store#dispatchaction) from the store 
 
-You have an exemple in `src/pages/home/index.js`
+You have an exemple in `src/pages/home/App.js`
 
 
 ## Accessing state informations from a component
 
 To access informations from the current state inside a component, use the hook [useSelector](https://react-redux.js.org/api/hooks#useselector)
 
-You have an exemple in `src/pages/home/index.js`
+You have an exemple in `src/pages/home/App.js`
 
 ## Logging
 
