@@ -7,6 +7,7 @@ import LogInForm from "../forms/LogInForm";
 import CustomLink from "../components/CustomLink";
 import RegisterForm from "../forms/RegisterForm";
 import {makeStyles} from "@material-ui/core/styles";
+import {register} from "../serviceWorkerRegistration";
 
 const useStyles = makeStyles({
     link: {
@@ -23,7 +24,7 @@ export default function SignUp() {
             <Container>
                 <Box>
                     <CustomBigCard title={"Register"}
-                                   subheader={"Register to the application."}
+                                   subheader={"Register on the application."}
                                    avatar={<Looks color={"primary"} />}
                                    content={<RegisterForm />}
                                    footer={

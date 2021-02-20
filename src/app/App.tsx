@@ -12,18 +12,18 @@ import {createMuiTheme, CssBaseline} from "@material-ui/core";
 import Home from "../pages/home";
 // @ts-ignore
 import {Provider} from "react-redux";
-import store from "./store";
+import store from "./userStore";
 import {light_theme} from "../config/themes";
 
 const App = () => (
     <ThemeProvider theme={createMuiTheme(light_theme)}>
         <Provider store={store}>
-        <CssBaseline />
-        <Router>
-            <Route exact path={"/"} component={Home} />
-            <Route exact path={"/login"} component={SignIn} />
-            <Route exact path={"/register"} component={SignUp} />
-        </Router>
+            <CssBaseline/>
+            <Router>
+                <Route exact path={"/"} component={Home}/>
+                <Route exact path={"/login"} component={SignIn}/>
+                <Route exact path={"/register"} component={SignUp}/>
+            </Router>
         </Provider>
     </ThemeProvider>
 );
