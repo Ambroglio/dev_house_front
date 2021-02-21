@@ -26,6 +26,13 @@ function getMember(id: string, jwt: string) {
     })
 }
 
+function deleteMember(id: string, jwt: string) {
+    return axios.delete(baseUrl + "member/" + id, {
+        headers:
+            getAuthorizationHeader(jwt)
+    })
+}
+
 export default {
-    registerUser, loginUser, verifyJwt, getMember
+    registerUser, loginUser, verifyJwt, getMember, deleteMember
 }

@@ -9,8 +9,8 @@ import ConnectedPage from "../../components/connected/ConnectedPage";
 
 export default function ConnectedHome() {
     return (
-        <ConnectedPage>
-            <CustomAppBar title={"QSI"} logOutButton={true}/>
+        <Box>
+            <CustomAppBar title={"QSI"} logOutButton={true} optionsButton={true}/>
 
             <Container>
                 <CustomBigCard
@@ -29,6 +29,6 @@ export default function ConnectedHome() {
                     }
                 />
             </Container>
-        </ConnectedPage>
+        </Box>
     )
 }

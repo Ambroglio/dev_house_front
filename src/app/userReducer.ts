@@ -142,6 +142,20 @@ const reducer = (state: UserState, action: UserAction) => {
                 })
 
             return state;
+        case "USER/DELETE_ME":
+            jwt = action.payload.jwt
+            id = action.payload.id
+
+            userApi.deleteMember(id, jwt)
+                .then(r => {
+                    store.dispatch({type: "USER/LOG_OUT"})
+                })
+                .catch(e => {
+                    store.dispatch({type: "USER/ERROR", payload: {
+                        error: e.response.data.error_message
+                        }})
+                })
+            return state
         case "USER/SET_MEMBER":
             return {...state, user: action.payload.user}
         default:

@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import SignIn from "../pages/unconnected/SignIn";
 import SignUp from "../pages/unconnected/SignUp";
 import {useSelector} from "react-redux";
@@ -9,6 +9,7 @@ import { Redirect } from 'react-router'
 import ConnectedHome from "../pages/connected/ConnectedHome";
 import store from "../app/userStore";
 import {getMe} from "../app/userAction";
+import Options from "../pages/connected/Options";
 
 export default function AppRouter() {
     const connected = useSelector((state: UserState) => state.connected);
@@ -27,18 +28,23 @@ export default function AppRouter() {
         //UNCONNECTED ROUTER
         return (
             <Router>
-                <Route exact path={"/"} component={UnconnectedHome}/>
-                <Route exact path={"/login"} component={SignIn}/>
-                <Route exact path={"/register"} component={SignUp}/>
-                <Route path={"/**"}><Redirect to={"/"} /></Route>
+                <Switch>
+                    <Route exact path={"/"} component={UnconnectedHome} />
+                    <Route exact path={"/login"} component={SignIn} />
+                    <Route exact path={"/register"} component={SignUp}></Route>
+                    <Route><Redirect to={"/"} /></Route>
+                </Switch>
             </Router>
         )
     } else {
         //CONNECTED ROUTER
         return (
             <Router>
-                <Route exact path={"/"} component={ConnectedHome}/>
-                <Route path={"/**"}><Redirect to={"/"} /></Route>
+                <Switch>
+                    <Route exact path={"/"} component={ConnectedHome} />
+                    <Route exact path={"/options"} component={Options} />
+                    <Route><Redirect to={"/"} /></Route>
+                </Switch>
             </Router>
         )
     }

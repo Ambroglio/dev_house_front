@@ -30,7 +30,8 @@ interface Props {
     title: string,
     logInButton?: boolean,
     registerButton?: boolean,
-    logOutButton?: boolean
+    logOutButton?: boolean,
+    optionsButton?: boolean
 }
 
 export default function CustomAppBar(props: Props) {
@@ -52,21 +53,28 @@ export default function CustomAppBar(props: Props) {
         <AppBar color={"primary"} position="static">
             <Toolbar>
                 <Typography variant="h6" component={"h6"} className={classes.title}>
-                    {props.title}
+                    <CustomLink to={"/"} className={classes.title}>
+                        {props.title}
+                    </CustomLink>
                 </Typography>
-                {props.logInButton &&
-                <CustomLink to="/login">
-                    <Button color={"inherit"}>
-                        Log in
-                    </Button>
-                </CustomLink>
-                }
-                {props.registerButton &&
-                <CustomLink to="/register">
-                    <Button color={"inherit"}>
-                        Register
-                    </Button>
-                </CustomLink>
+                {!user &&
+                <>
+                    {
+                        props.logInButton &&
+                        <CustomLink to="/login">
+                            <Button color={"inherit"}>
+                                Log in
+                            </Button>
+                        </CustomLink>
+                    }
+                    {props.registerButton &&
+                    <CustomLink to="/register">
+                        <Button color={"inherit"}>
+                            Register
+                        </Button>
+                    </CustomLink>
+                    }
+                </>
                 }
                 {user &&
                 <>
@@ -88,8 +96,15 @@ export default function CustomAppBar(props: Props) {
                                 <Grid item xs={12}><Divider/></Grid>
                             </Grid>
                         </MenuItem>
+                        {props.optionsButton &&
+                        <CustomLink to={"/options"}>
+                            <MenuItem>
+                                Options
+                            </MenuItem>
+                        </CustomLink>
+                        }
                         {props.logOutButton &&
-                        <CustomLink to={"/"} onClick={logOut}>
+                        <CustomLink color={"error"} to={"/"} onClick={logOut}>
                             <MenuItem>
                                 Log out
                             </MenuItem>

@@ -65,7 +65,6 @@ export default function RegisterForm() {
                     <Grid item xs={12}>
                         <Button onClick={submit} fullWidth color={"primary"} variant={"contained"}>Register</Button>
                     </Grid>
-
                 </Grid>
             </form>
         </>

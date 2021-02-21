@@ -9,7 +9,7 @@ import UnconnectedPage from "../../components/unconnected/UnconnectedPage";
 
 export default function UnconnectedHome() {
     return (
-        <UnconnectedPage>
+        <Box>
             <CustomAppBar title={"QSI"} logInButton={true} registerButton={true}/>
 
             <Container>
@@ -38,6 +38,6 @@ export default function UnconnectedHome() {
                     }
                 />
             </Container>
-        </UnconnectedPage>
+        </Box>
     )
 }

@@ -11,6 +11,8 @@ type Props = {
 export default function ConnectedPage({children} : Props) {
     const connected = useSelector((state: UserState) => state.connected)
 
+    console.log("CONNECTED PAGE : " + connected)
+
     if (connected) {
         return (
             <Box>

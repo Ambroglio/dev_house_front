@@ -31,6 +31,7 @@ export type UserJwtType =
 export type UserConnectedType =
     | "USER/SET_CONNECTED"
     | "USER/GET_ME"
+    | "USER/DELETE_ME"
 
 
 export type UserAction = {
@@ -84,6 +85,16 @@ export function logOut() {
 export function getMe(jwt: string, id: string) {
     store.dispatch({
         type: "USER/GET_ME",
+        payload: {
+            jwt,
+            id
+        }
+    })
+}
+
+export function deleteMe(jwt: string, id: string) {
+    store.dispatch({
+        type: "USER/DELETE_ME",
         payload: {
             jwt,
             id
