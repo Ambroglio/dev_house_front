@@ -11,6 +11,12 @@ export interface User {
     email: string
 }
 
+export interface UpdateUser {
+    email: string,
+    username: string,
+    password: string,
+}
+
 export type UserActionType =
     | "USER/SIGN_UP"
     | "USER/SIGN_IN"
@@ -22,8 +28,9 @@ export type UserWithoutPayloadType =
     | "USER/NAVIGATE"
     | "USER/LOG_OUT"
 
-export type UserErrorType =
+export type UserMessageType =
     | "USER/ERROR"
+    | "USER/SUCCESS"
 
 export type UserJwtType =
     | "USER/VERIFY_JWT"
@@ -33,6 +40,8 @@ export type UserConnectedType =
     | "USER/GET_ME"
     | "USER/DELETE_ME"
 
+export type UserUpdateType =
+    | "USER/UPDATE"
 
 export type UserAction = {
     type: UserActionType,
@@ -40,9 +49,10 @@ export type UserAction = {
         connectUser: ConnectUser
     }
 } | {
-    type: UserErrorType,
+    type: UserMessageType,
     payload: {
-        error: string
+        message: string,
+        user?: User
     }
 } | {
     type: UserWithoutPayloadType
@@ -61,6 +71,13 @@ export type UserAction = {
     type: UserMemberType,
     payload: {
         user: User
+    }
+} | {
+    type: UserUpdateType,
+    payload: {
+        jwt: string,
+        id: string
+        user: UpdateUser
     }
 }
 
@@ -98,6 +115,17 @@ export function deleteMe(jwt: string, id: string) {
         payload: {
             jwt,
             id
+        }
+    })
+}
+
+export function updateMe(jwt: string, id: string, user: UpdateUser) {
+    store.dispatch({
+        type: "USER/UPDATE",
+        payload: {
+            jwt,
+            id,
+            user
         }
     })
 }

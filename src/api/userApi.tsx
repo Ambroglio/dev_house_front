@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ConnectUser} from "../app/userAction";
+import {ConnectUser, UpdateUser} from "../app/userAction";
 
 const baseUrl = "http://localhost:3000/"
 
@@ -33,6 +33,12 @@ function deleteMember(id: string, jwt: string) {
     })
 }
 
+function updateMember(id: string, jwt: string, updateUser: UpdateUser) {
+    return axios.put(baseUrl + "member/" + id, updateUser, {
+        headers: getAuthorizationHeader(jwt)
+    })
+}
+
 export default {
-    registerUser, loginUser, verifyJwt, getMember, deleteMember
+    registerUser, loginUser, verifyJwt, getMember, deleteMember, updateMember
 }

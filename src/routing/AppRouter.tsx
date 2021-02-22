@@ -31,7 +31,7 @@ export default function AppRouter() {
                 <Switch>
                     <Route exact path={"/"} component={UnconnectedHome} />
                     <Route exact path={"/login"} component={SignIn} />
-                    <Route exact path={"/register"} component={SignUp}></Route>
+                    <Route exact path={"/register"} component={SignUp} />
                     <Route><Redirect to={"/"} /></Route>
                 </Switch>
             </Router>

@@ -45,7 +45,7 @@ const reducer = (state: UserState, action: UserAction) => {
 
     switch (action.type) {
         case "USER/ERROR":
-            return {...state, error: action.payload.error, successMessage: null};
+            return {...state, error: action.payload.message, successMessage: null};
         case "USER/SIGN_UP":
             console.log("Registering the user !")
             userApi.registerUser(action.payload.connectUser)
@@ -63,7 +63,7 @@ const reducer = (state: UserState, action: UserAction) => {
                 .catch(e => {
                     store.dispatch({
                         type: "USER/ERROR", payload: {
-                            error: e.response.data.error_message
+                            message: e.response.data.error_message
                         }
                     })
                 })
@@ -86,7 +86,7 @@ const reducer = (state: UserState, action: UserAction) => {
                 .catch(e => {
                     store.dispatch({
                         type: "USER/ERROR", payload: {
-                            error: e.response.data.error_message
+                            message: e.response.data.error_message
                         }
                     })
                 })
@@ -130,12 +130,14 @@ const reducer = (state: UserState, action: UserAction) => {
 
             userApi.getMember(id, jwt)
                 .then(r => {
-                    store.dispatch({type: "USER/SET_MEMBER", payload: {
-                        user: {
-                            email: r.data.email,
-                            username: r.data.username
+                    store.dispatch({
+                        type: "USER/SET_MEMBER", payload: {
+                            user: {
+                                email: r.data.email,
+                                username: r.data.username
+                            }
                         }
-                        }})
+                    })
                 })
                 .catch(e => {
                     store.dispatch({type: "USER/LOG_OUT"})
@@ -151,16 +153,41 @@ const reducer = (state: UserState, action: UserAction) => {
                     store.dispatch({type: "USER/LOG_OUT"})
                 })
                 .catch(e => {
-                    store.dispatch({type: "USER/ERROR", payload: {
-                        error: e.response.data.error_message
-                        }})
+                    store.dispatch({
+                        type: "USER/ERROR", payload: {
+                            message: e.response.data.error_message
+                        }
+                    })
                 })
             return state
+        case "USER/UPDATE":
+            userApi.updateMember(action.payload.id, action.payload.jwt, action.payload.user)
+                .then(r => store.dispatch({
+                    type: "USER/SUCCESS", payload: {
+                        message: "User successfully updated",
+                        user: {
+                            email: action.payload.user.email,
+                            username: action.payload.user.username
+                        }
+                    }
+                }))
+                .catch(e => store.dispatch({
+                    type: "USER/ERROR",
+                    payload: {
+                        message: e.response.data.error_message
+                    }
+                }))
+
+            return state
+        case "USER/SUCCESS":
+            return {...state, user: action.payload.user? action.payload.user : state.user, successMessage: action.payload.message, error: null}
         case "USER/SET_MEMBER":
             return {...state, user: action.payload.user}
         default:
             return state;
     }
+
 }
+
 
 export default compose(liftState, reducer);
