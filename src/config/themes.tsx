@@ -12,5 +12,17 @@ export const light_theme = {
             contrastText: "black"
         }
     },
+}
 
+export const dark_theme = {
+    palette: {
+        type: "dark" as PaletteType,
+        background: {
+            default: grey[500]
+        },
+        primary: {
+            main: '#212121',
+            contrastText: '#fff',
+        }
+    },
 }

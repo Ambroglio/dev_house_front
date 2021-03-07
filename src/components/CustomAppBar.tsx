@@ -9,6 +9,7 @@ import {useSelector} from "react-redux";
 import store from "../app/userStore";
 import {AccountCircle} from "@material-ui/icons";
 import {red} from "@material-ui/core/colors";
+import Toggle from "./Toggle";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -57,6 +58,7 @@ export default function CustomAppBar(props: Props) {
                         {props.title}
                     </CustomLink>
                 </Typography>
+                <Toggle/>
                 {!user &&
                 <>
                     {

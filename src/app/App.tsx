@@ -12,16 +12,30 @@ import {createMuiTheme, CssBaseline} from "@material-ui/core";
 // @ts-ignore
 import {Provider} from "react-redux";
 import store from "./userStore";
-import {light_theme} from "../config/themes";
+import {light_theme, dark_theme} from "../config/themes";
 import AppRouter from "../routing/AppRouter";
+import {AppThemeContext, AppThemeProvider} from "../context/AppThemeContext";
 
 export default function App() {
     return (
-        <ThemeProvider theme={createMuiTheme(light_theme)}>
-            <Provider store={store}>
-                <CssBaseline/>
-                <AppRouter />
-            </Provider>
-        </ThemeProvider>
-    )
+        <AppThemeProvider>
+            <AppThemeContext.Consumer>{
+                theme => {
+                    let muiTheme = createMuiTheme(light_theme);
+                    if (theme.theme === "dark") {
+                        muiTheme = createMuiTheme(dark_theme);
+                    }
+
+                    return (<ThemeProvider theme={muiTheme}>
+                        <CssBaseline/>
+                        <Provider store={store}>
+                            <CssBaseline/>
+                            <AppRouter/>
+                        </Provider>
+                    </ThemeProvider>)
+                }
+            }
+            </AppThemeContext.Consumer>
+        </AppThemeProvider>
+    );
 }
