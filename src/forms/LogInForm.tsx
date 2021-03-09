@@ -1,7 +1,7 @@
 import {Button, Divider, Grid, TextField} from "@material-ui/core";
 import React, {useState} from "react";
 import {signIn} from "../app/userAction";
-import store from "../app/userStore";
+import store from "../app/store";
 import {useSelector} from "react-redux";
 import {UserState} from "../app/userReducer";
 import {Alert, AlertTitle} from "@material-ui/lab";

@@ -6,7 +6,7 @@ import {compose} from "redux";
 import {Cmd, liftState, loop} from "redux-loop";
 import {User, UserAction} from "./userAction";
 import userApi from "../api/userApi";
-import store from "./userStore";
+import store from "./store";
 
 export interface UserState {
     connected: boolean,
@@ -39,7 +39,7 @@ export function loadState() {
     return {...initialState, connected: connected, jwt: jwt, id: id}
 }
 
-const reducer = (state: UserState, action: UserAction) => {
+const userReducer = (state: UserState = loadState(), action: UserAction) => {
     let jwt = ""
     let id = ""
 
@@ -190,4 +190,4 @@ const reducer = (state: UserState, action: UserAction) => {
 }
 
 
-export default compose(liftState, reducer);
+export default userReducer;

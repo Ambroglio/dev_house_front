@@ -15,7 +15,7 @@ export default function Options() {
 
     return (
         <ConnectedPage>
-            <CustomAppBar title={"QSI"} logOutButton={true} optionsButton={true}/>
+            <CustomAppBar title={"Dev House"} logOutButton={true} optionsButton={true}/>
 
             <Container>
                 <Box>

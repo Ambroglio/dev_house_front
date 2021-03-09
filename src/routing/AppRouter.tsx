@@ -7,12 +7,16 @@ import {UserState} from "../app/userReducer";
 import UnconnectedHome from "../pages/unconnected/UnconnectedHome";
 import { Redirect } from 'react-router'
 import ConnectedHome from "../pages/connected/ConnectedHome";
-import store from "../app/userStore";
+import store from "../app/store";
 import {getMe} from "../app/userAction";
 import Options from "../pages/connected/Options";
+import MemberOffers from "../pages/connected/MemberOffers";
 
 export default function AppRouter() {
-    const connected = useSelector((state: UserState) => state.connected);
+    const connected = useSelector((state: UserState) => {
+        console.warn("STATE")
+        console.warn(state)
+        return state.connected});
     const jwt = useSelector((state: UserState) => state.jwt);
     const id = useSelector((state : UserState) => state.id)
 
@@ -43,6 +47,9 @@ export default function AppRouter() {
                 <Switch>
                     <Route exact path={"/"} component={ConnectedHome} />
                     <Route exact path={"/options"} component={Options} />
+                    <Route eaxct path={"/offers/me"}>
+                        <MemberOffers me={true} />
+                    </Route>
                     <Route><Redirect to={"/"} /></Route>
                 </Switch>
             </Router>

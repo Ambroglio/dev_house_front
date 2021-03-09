@@ -10,7 +10,7 @@ import UnconnectedPage from "../../components/unconnected/UnconnectedPage";
 export default function UnconnectedHome() {
     return (
         <Box>
-            <CustomAppBar title={"QSI"} logInButton={true} registerButton={true}/>
+            <CustomAppBar logInButton={true} registerButton={true}/>
 
             <Container>
                 <CustomBigCard

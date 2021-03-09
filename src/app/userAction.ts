@@ -1,4 +1,4 @@
-import store from "./userStore";
+import store from "./store";
 
 export interface ConnectUser {
     email: string,

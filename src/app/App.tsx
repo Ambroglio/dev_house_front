@@ -11,7 +11,7 @@ import {ThemeProvider} from '@material-ui/core/styles';
 import {createMuiTheme, CssBaseline} from "@material-ui/core";
 // @ts-ignore
 import {Provider} from "react-redux";
-import store from "./userStore";
+import store from "./store";
 import {light_theme, dark_theme} from "../config/themes";
 import AppRouter from "../routing/AppRouter";
 import {AppThemeContext, AppThemeProvider} from "../context/AppThemeContext";

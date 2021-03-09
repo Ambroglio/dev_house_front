@@ -6,7 +6,7 @@ import CustomLink from "./CustomLink";
 import {getMe, logOut} from "../app/userAction";
 import {UserState} from "../app/userReducer";
 import {useSelector} from "react-redux";
-import store from "../app/userStore";
+import store from "../app/store";
 import {AccountCircle} from "@material-ui/icons";
 import {red} from "@material-ui/core/colors";
 import Toggle from "./Toggle";
@@ -27,12 +27,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-interface Props {
-    title: string,
+type Props = {
+    title?: string,
     logInButton?: boolean,
     registerButton?: boolean,
     logOutButton?: boolean,
-    optionsButton?: boolean
+    optionsButton?: boolean,
+    myOffersButton?: boolean
 }
 
 export default function CustomAppBar(props: Props) {
@@ -55,7 +56,7 @@ export default function CustomAppBar(props: Props) {
             <Toolbar>
                 <Typography variant="h6" component={"h6"} className={classes.title}>
                     <CustomLink to={"/"} className={classes.title}>
-                        {props.title}
+                        {props.title ? props.title : "Dev House"}
                     </CustomLink>
                 </Typography>
                 <Toggle/>
@@ -98,14 +99,26 @@ export default function CustomAppBar(props: Props) {
                                 <Grid item xs={12}><Divider/></Grid>
                             </Grid>
                         </MenuItem>
-                        {props.optionsButton &&
+                        {(props.myOffersButton == null || props.myOffersButton) &&
+                        <CustomLink to={"/offers/me"}>
+                            <MenuItem>
+                                My offers
+                            </MenuItem>
+                        </CustomLink>
+                        }
+                        <MenuItem className={classes.menuItemWithoutLink} disabled={true}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}><Divider/></Grid>
+                            </Grid>
+                        </MenuItem>
+                        {(props.optionsButton == null || props.optionsButton) &&
                         <CustomLink to={"/options"}>
                             <MenuItem>
                                 Options
                             </MenuItem>
                         </CustomLink>
                         }
-                        {props.logOutButton &&
+                        {(props.logOutButton == null || props.logOutButton) &&
                         <CustomLink color={"error"} to={"/"} onClick={logOut}>
                             <MenuItem>
                                 Log out

@@ -10,7 +10,7 @@ import ConnectedPage from "../../components/connected/ConnectedPage";
 export default function ConnectedHome() {
     return (
         <Box>
-            <CustomAppBar title={"QSI"} logOutButton={true} optionsButton={true}/>
+            <CustomAppBar title={"Dev House"} logOutButton={true} optionsButton={true}/>
 
             <Container>
                 <CustomBigCard
