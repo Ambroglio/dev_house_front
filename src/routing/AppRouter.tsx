@@ -7,18 +7,19 @@ import {UserState} from "../app/userReducer";
 import UnconnectedHome from "../pages/unconnected/UnconnectedHome";
 import { Redirect } from 'react-router'
 import ConnectedHome from "../pages/connected/ConnectedHome";
-import store from "../app/store";
+import store, {GlobalState} from "../app/store";
 import {getMe} from "../app/userAction";
 import Options from "../pages/connected/Options";
 import MemberOffers from "../pages/connected/MemberOffers";
+import CreateOffer from "../pages/connected/CreateOffer";
+import Offer from "../pages/global/Offer";
+import UpdateOffer from "../pages/connected/UpdateOffer";
 
 export default function AppRouter() {
-    const connected = useSelector((state: UserState) => {
-        console.warn("STATE")
-        console.warn(state)
-        return state.connected});
-    const jwt = useSelector((state: UserState) => state.jwt);
-    const id = useSelector((state : UserState) => state.id)
+    const connected = useSelector((state: GlobalState) => {
+        return state.userState.connected});
+    const jwt = useSelector((state: GlobalState) => state.userState.jwt);
+    const id = useSelector((state : GlobalState) => state.userState.id)
 
     if (jwt != null && id != null) {
         //checking if token is still valid
@@ -36,6 +37,7 @@ export default function AppRouter() {
                     <Route exact path={"/"} component={UnconnectedHome} />
                     <Route exact path={"/login"} component={SignIn} />
                     <Route exact path={"/register"} component={SignUp} />
+                    <Route exact path={"/offers/get/:id"} component={Offer} />
                     <Route><Redirect to={"/"} /></Route>
                 </Switch>
             </Router>
@@ -47,9 +49,12 @@ export default function AppRouter() {
                 <Switch>
                     <Route exact path={"/"} component={ConnectedHome} />
                     <Route exact path={"/options"} component={Options} />
-                    <Route eaxct path={"/offers/me"}>
+                    <Route exact path={"/offers/me"}>
                         <MemberOffers me={true} />
                     </Route>
+                    <Route exact path={"/offers/get/:id"} component={Offer} />
+                    <Route exact path={"/offers/:id/update"} component={UpdateOffer} />
+                    <Route exact path={"/offers/create"} component={CreateOffer} />
                     <Route><Redirect to={"/"} /></Route>
                 </Switch>
             </Router>

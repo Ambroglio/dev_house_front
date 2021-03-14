@@ -1,4 +1,5 @@
 import axios from "axios";
+import {CreateOffer} from "../app/offerAction";
 
 const baseUrl = "http://localhost:8099/"
 
@@ -18,13 +19,13 @@ function getOfferById(offerId: string) {
     return axios.get(`${baseUrl}offers/${offerId}`)
 }
 
-function createOffer(jwt: string, offer: Offer) {
+function createOffer(jwt: string, offer: CreateOffer) {
     return axios.post(baseUrl + "offers/", offer, {
         headers: getAuthorizationHeader(jwt)
     })
 }
 
-function updateOffer(id: string, jwt: string, offer: Offer) {
+function updateOffer(id: string, jwt: string, offer: CreateOffer) {
     return axios.put(baseUrl + "offers/" + id, offer, {
         headers: getAuthorizationHeader(jwt)
     })

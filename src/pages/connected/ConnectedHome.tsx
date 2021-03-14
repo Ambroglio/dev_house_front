@@ -22,11 +22,6 @@ export default function ConnectedHome() {
                             You are now connected !
                         </Typography>
                     }
-                    footer={
-                        <>
-
-                        </>
-                    }
                 />
             </Container>
         </Box>

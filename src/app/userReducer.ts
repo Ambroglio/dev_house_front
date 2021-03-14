@@ -140,6 +140,7 @@ const userReducer = (state: UserState = loadState(), action: UserAction) => {
                     })
                 })
                 .catch(e => {
+                    //TODO error with firefox, only working with an open console
                     store.dispatch({type: "USER/LOG_OUT"})
                 })
 

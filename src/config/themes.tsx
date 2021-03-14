@@ -9,7 +9,11 @@ export const light_theme = {
         },
         primary: {
             main: green[300],
-            contrastText: "black"
+            contrastText: "#000"
+        },
+        secondary: {
+            main: grey[200],
+            contrastText: "#000"
         }
     },
 }
@@ -21,8 +25,12 @@ export const dark_theme = {
             default: grey[500]
         },
         primary: {
-            main: '#212121',
+            main: '#a82f2f',
             contrastText: '#fff',
+        },
+        secondary: {
+            main: grey[200],
+            contrastText: "#000"
         }
     },
 }

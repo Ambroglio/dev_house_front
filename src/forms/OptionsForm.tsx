@@ -4,13 +4,14 @@ import {Alert, AlertTitle} from "@material-ui/lab";
 import {useSelector} from "react-redux";
 import {UserState} from "../app/userReducer";
 import {updateMe, User} from "../app/userAction";
+import {GlobalState} from "../app/store";
 
 export default function OptionsForm() {
-    const user = useSelector((state: UserState) => state.user)
-    const error = useSelector((state: UserState) => state.error)
-    const successMessage = useSelector((state : UserState) => state.successMessage)
-    const id = useSelector((state: UserState) => state.id)
-    const jwt = useSelector((state: UserState) => state.jwt)
+    const user = useSelector((state: GlobalState) => state.userState.user)
+    const error = useSelector((state: GlobalState) => state.userState.error)
+    const successMessage = useSelector((state : GlobalState) => state.userState.successMessage)
+    const id = useSelector((state: GlobalState) => state.userState.id)
+    const jwt = useSelector((state: GlobalState) => state.userState.jwt)
 
     const [email, setEmail] = useState(user?.email)
     const [username, setUsername] = useState(user?.username)

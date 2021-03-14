@@ -1,13 +1,13 @@
 import {Button, Divider, Grid, TextField} from "@material-ui/core";
 import React, {useState} from "react";
 import {signUp} from "../app/userAction";
-import store from "../app/store";
+import store, {GlobalState} from "../app/store";
 import {useSelector} from "react-redux";
 import {UserState} from "../app/userReducer";
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 export default function RegisterForm() {
-    const error = useSelector((state: UserState) => state.error);
+    const error = useSelector((state: GlobalState) => state.userState.error);
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")

@@ -6,7 +6,7 @@ import CustomLink from "./CustomLink";
 import {getMe, logOut} from "../app/userAction";
 import {UserState} from "../app/userReducer";
 import {useSelector} from "react-redux";
-import store from "../app/store";
+import store, {GlobalState} from "../app/store";
 import {AccountCircle} from "@material-ui/icons";
 import {red} from "@material-ui/core/colors";
 import Toggle from "./Toggle";
@@ -38,7 +38,7 @@ type Props = {
 
 export default function CustomAppBar(props: Props) {
     const classes = useStyles();
-    const user = useSelector((state: UserState) => state.user)
+    const user = useSelector((state: GlobalState) => state.userState.user)
 
     //menu handler
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -63,14 +63,14 @@ export default function CustomAppBar(props: Props) {
                 {!user &&
                 <>
                     {
-                        props.logInButton &&
+                        (props.logInButton == null || props.logInButton) &&
                         <CustomLink to="/login">
                             <Button color={"inherit"}>
                                 Log in
                             </Button>
                         </CustomLink>
                     }
-                    {props.registerButton &&
+                    {(props.registerButton == null || props.registerButton) &&
                     <CustomLink to="/register">
                         <Button color={"inherit"}>
                             Register

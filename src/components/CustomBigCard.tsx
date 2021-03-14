@@ -19,7 +19,7 @@ interface Props {
     subheader: string,
     avatar: React.ReactNode,
     content: React.ReactNode,
-    footer: React.ReactNode
+    footer?: React.ReactNode
 }
 
 export default function CustomBigCard({title, subheader, avatar, content, footer} : Props) {
@@ -32,10 +32,15 @@ export default function CustomBigCard({title, subheader, avatar, content, footer
             <CardContent>
                 {content}
             </CardContent>
-            <Divider />
-            <CardContent>
-                {footer}
-            </CardContent>
+            {footer != null &&
+            <>
+                <Divider/>
+                <CardContent>
+                    {footer}
+                </CardContent>
+            </>
+            }
+
         </Card>
     )
 }

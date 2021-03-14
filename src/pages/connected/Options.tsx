@@ -8,10 +8,11 @@ import OptionsForm from "../../forms/OptionsForm";
 import {deleteMe} from "../../app/userAction";
 import {useSelector} from "react-redux";
 import {UserState} from "../../app/userReducer";
+import {GlobalState} from "../../app/store";
 
 export default function Options() {
-    const id = useSelector((state: UserState) => state.id)!!
-    const jwt = useSelector((state: UserState) => state.jwt)!!
+    const id = useSelector((state: GlobalState) => state.userState.id)!!
+    const jwt = useSelector((state: GlobalState) => state.userState.jwt)!!
 
     return (
         <ConnectedPage>
