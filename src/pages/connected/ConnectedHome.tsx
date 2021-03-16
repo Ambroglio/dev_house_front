@@ -6,6 +6,7 @@ import CustomBigCard from "../../components/CustomBigCard";
 import {Face, Home} from "@material-ui/icons";
 import CustomLink from "../../components/CustomLink";
 import ConnectedPage from "../../components/connected/ConnectedPage";
+import MapCard from "../../components/MapCard";
 
 export default function ConnectedHome() {
     return (
@@ -23,6 +24,7 @@ export default function ConnectedHome() {
                         </Typography>
                     }
                 />
+                <MapCard />
             </Container>
         </Box>
     )

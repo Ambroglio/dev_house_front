@@ -13,6 +13,7 @@ import CustomLink from "../../components/CustomLink";
 // @ts-ignore
 import {ReactBingmaps} from 'react-bingmaps';
 import {makeStyles} from "@material-ui/core/styles";
+import {red} from "@material-ui/core/colors";
 
 interface MatchParams {
     id: string;
@@ -24,6 +25,13 @@ interface Props extends RouteComponentProps<MatchParams> {
 const useStyles = makeStyles((theme) => ({
     map: {
         height: "500px"
+    },
+    deleteButton: {
+        backgroundColor: red[400],
+        marginLeft: theme.spacing(2),
+        "&:hover": {
+            backgroundColor: red[500]
+        }
     }
 }))
 
@@ -35,6 +43,7 @@ export default function Offer({match}: Props) {
     const loading = useSelector((state: GlobalState) => state.offerState.loading)
     const offers = useSelector((state: GlobalState) => state.offerState.offers)
     const userId = useSelector((state: GlobalState) => state.userState.id)
+    const jwt = useSelector((state: GlobalState) => state.userState.jwt)
 
     //TODO set in properties or .env
     const API_KEY = "ArWdEwy5QEixJgQIeZxYIKGDs6cz6Lqi6QeIMeIvCRB-jFpgzLRWct2gUDvB0nKg"
@@ -56,7 +65,7 @@ export default function Offer({match}: Props) {
         setFetch(false)
     }
 
-    if (!fetch && !loading && offer == null) {
+    if (!fetch && !loading && (offer == null || !offer.valid || (offer.validityEndDate < new Date()))) {
         return <Redirect to={"/"}/>
     }
 
@@ -84,7 +93,7 @@ export default function Offer({match}: Props) {
                                                    </Typography>
                                                </Grid>
                                                <Grid item xs={12}>
-                                                   <Divider />
+                                                   <Divider/>
                                                </Grid>
                                                <Grid item xs={3}>
                                                    <Typography color={"primary"}>
@@ -96,14 +105,14 @@ export default function Offer({match}: Props) {
                                                        {offer!!.company.name}
                                                    </Typography>
                                                </Grid>
-                                               <Grid item xs={3} />
+                                               <Grid item xs={3}/>
                                                <Grid item xs={9}>
                                                    <Typography>
                                                        {offer!!.company.description}
                                                    </Typography>
                                                </Grid>
                                                <Grid item xs={12}>
-                                                   <Divider />
+                                                   <Divider/>
                                                </Grid>
                                                <Grid item xs={3}>
                                                    <Typography color={"primary"}>
@@ -116,7 +125,7 @@ export default function Offer({match}: Props) {
                                                    </Typography>
                                                </Grid>
                                                <Grid item xs={12}>
-                                                   <Divider />
+                                                   <Divider/>
                                                </Grid>
                                                <Grid item xs={3}>
                                                    <Typography color={"primary"}>
@@ -144,11 +153,27 @@ export default function Offer({match}: Props) {
                                            </Grid>
                                        }
                                        footer={
-                                           <CustomLink to={`/offers/${id}/update`}>
-                                               <Button color={"secondary"} variant={"contained"}>
-                                                   Update offer
-                                               </Button>
-                                           </CustomLink>
+                                           <Grid container spacing={2}>
+                                               <Grid item xs={12}>
+                                                   <CustomLink to={`/offers/${id}/update`}>
+                                                       <Button color={"secondary"} variant={"contained"}>
+                                                           Update offer
+                                                       </Button>
+                                                   </CustomLink>
+                                                   <Button className={classes.deleteButton} variant={"contained"} onClick={(event) => {
+                                                       store.dispatch({
+                                                           type: "OFFER/DELETE",
+                                                           payload: {
+                                                               id: offer!!.id,
+                                                               jwt: jwt!!
+                                                           }
+                                                       })
+                                                   }
+                                                   }>
+                                                       Delete offer
+                                                   </Button>
+                                               </Grid>
+                                           </Grid>
                                        }
                         />
                         }
@@ -158,11 +183,71 @@ export default function Offer({match}: Props) {
                                        subheader={"The following describes the offer."}
                                        avatar={<Note color={"primary"}/>}
                                        content={
-                                           <>
-                                               <Typography>
-                                                   {offer!!.description}
-                                               </Typography>
-                                           </>
+                                           <Grid container spacing={2}>
+                                               <Grid item xs={12}>
+                                                   <Typography>
+                                                       {offer!!.description}
+                                                   </Typography>
+                                               </Grid>
+                                               <Grid item xs={12}>
+                                                   <Divider/>
+                                               </Grid>
+                                               <Grid item xs={3}>
+                                                   <Typography color={"primary"}>
+                                                       Company
+                                                   </Typography>
+                                               </Grid>
+                                               <Grid item xs={9}>
+                                                   <Typography>
+                                                       {offer!!.company.name}
+                                                   </Typography>
+                                               </Grid>
+                                               <Grid item xs={3}/>
+                                               <Grid item xs={9}>
+                                                   <Typography>
+                                                       {offer!!.company.description}
+                                                   </Typography>
+                                               </Grid>
+                                               <Grid item xs={12}>
+                                                   <Divider/>
+                                               </Grid>
+                                               <Grid item xs={3}>
+                                                   <Typography color={"primary"}>
+                                                       Contract type
+                                                   </Typography>
+                                               </Grid>
+                                               <Grid item xs={9}>
+                                                   <Typography>
+                                                       {offer!!.contractType}
+                                                   </Typography>
+                                               </Grid>
+                                               <Grid item xs={12}>
+                                                   <Divider/>
+                                               </Grid>
+                                               <Grid item xs={3}>
+                                                   <Typography color={"primary"}>
+                                                       Location
+                                                   </Typography>
+                                               </Grid>
+                                               <Grid item xs={9}>
+                                                   <Typography>
+                                                       {offer!!.cityName}
+                                                   </Typography>
+                                               </Grid>
+                                               <Grid item xs={12} className={classes.map} id={"mapContainer"}>
+                                                   <ReactBingmaps
+                                                       bingmapKey={API_KEY}
+                                                       center={[offer!!.latitude, offer!!.longitude]}
+                                                       pushPins={[
+                                                           {
+                                                               location: [offer!!.latitude, offer!!.longitude],
+                                                               option: {color: "black"},
+                                                           }
+                                                       ]}
+                                                       zoom={15}
+                                                   />
+                                               </Grid>
+                                           </Grid>
                                        }
                         />
                         }

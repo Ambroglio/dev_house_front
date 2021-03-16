@@ -4,6 +4,15 @@ export type OfferActionMemberIdType =
 export type OfferActionIdType =
     | "OFFER/FETCH_BY_ID"
 
+export type OfferActionDelete =
+    | "OFFER/DELETE"
+
+export type OfferActionCityNameType =
+    | "OFFER/FETCH_BY_CITY_NAME"
+
+export type OfferActionType =
+    | "OFFER/FETCH"
+
 export type OfferActionListResult =
     | "OFFER/RESULT_LIST"
 
@@ -51,7 +60,7 @@ export type OfferAction =
         type: OfferActionSuccess,
         payload: {
             message: String,
-            data: Offer
+            data: Offer | null
         }
     } |
     {
@@ -64,6 +73,22 @@ export type OfferAction =
         type: OfferActionError,
         payload: {
             message: string
+        }
+    } |
+    {
+        type: OfferActionType
+    } |
+    {
+        type: OfferActionCityNameType,
+        payload: {
+            cityName: string
+        }
+    } |
+    {
+        type: OfferActionDelete,
+        payload: {
+            id: string,
+            jwt: string
         }
     }
 

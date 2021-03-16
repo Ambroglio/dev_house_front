@@ -6,6 +6,7 @@ import CustomBigCard from "../../components/CustomBigCard";
 import {Home} from "@material-ui/icons";
 import CustomLink from "../../components/CustomLink";
 import UnconnectedPage from "../../components/unconnected/UnconnectedPage";
+import MapCard from "../../components/MapCard";
 
 export default function UnconnectedHome() {
     return (
@@ -37,6 +38,8 @@ export default function UnconnectedHome() {
                         </>
                     }
                 />
+
+                <MapCard />
             </Container>
         </Box>
     )
