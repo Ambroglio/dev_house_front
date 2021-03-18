@@ -41,6 +41,13 @@ function getOffersByCityName(cityName: string) {
     return axios.get(`${baseUrl}offers/city/${cityName}`)
 }
 
+function getCities() {
+    return axios.get(`${baseUrl}cities/`)
+}
+
 export default {
-    getOffersByMemberId, getAllOffers, getOfferById, createOffer, updateOffer, deleteOffer, getOffersByCityName
+    getOffersByMemberId, getAllOffers, getOfferById,
+    createOffer, updateOffer, deleteOffer,
+    getOffersByCityName,
+    getCities
 }

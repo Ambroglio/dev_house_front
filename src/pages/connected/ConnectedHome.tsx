@@ -11,7 +11,7 @@ import MapCard from "../../components/MapCard";
 export default function ConnectedHome() {
     return (
         <Box>
-            <CustomAppBar title={"Dev House"} logOutButton={true} optionsButton={true}/>
+            <CustomAppBar logOutButton={true} optionsButton={true}/>
 
             <Container>
                 <CustomBigCard

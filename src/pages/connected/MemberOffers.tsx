@@ -107,14 +107,23 @@ export default function MemberOffers(props: Props) {
                                         <Typography>{item.title}</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        <Typography>
-                                            {item.description}
-                                        </Typography>
-                                        <CustomLink to={"/login"}>
-                                            <Button color={"secondary"}>
-                                                See offer
-                                            </Button>
-                                        </CustomLink>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={12}>
+                                                <Typography>
+                                                    {item.description}
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <Divider />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <CustomLink to={`/offers/get/${item.id}`}>
+                                                    <Button color={"secondary"} variant={"contained"}>
+                                                        See offer
+                                                    </Button>
+                                                </CustomLink>
+                                            </Grid>
+                                        </Grid>
                                     </AccordionDetails>
                                 </Accordion>
                             )

@@ -18,7 +18,7 @@ export default function SignIn() {
     const classes = useStyles();
     return (
         <UnconnectedPage>
-            <CustomAppBar title={"Dev House"}
+            <CustomAppBar
                           logInButton={false} registerButton={true}/>
 
             <Container>

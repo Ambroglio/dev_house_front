@@ -20,7 +20,7 @@ export default function SignUp() {
 
     return (
         <UnconnectedPage>
-            <CustomAppBar title={"Dev House"} logInButton={true} registerButton={false}/>
+            <CustomAppBar logInButton={true} registerButton={false}/>
             <Container>
                 <Box>
                     <CustomBigCard title={"Register"}
